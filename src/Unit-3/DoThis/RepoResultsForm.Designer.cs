@@ -146,7 +146,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripProgressBar tsProgress;
         private System.Windows.Forms.ToolStripStatusLabel tsStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Owner;
+        private new System.Windows.Forms.DataGridViewTextBoxColumn Owner;
         private System.Windows.Forms.DataGridViewTextBoxColumn RepoName;
         private System.Windows.Forms.DataGridViewLinkColumn URL;
         private System.Windows.Forms.DataGridViewTextBoxColumn Shared;

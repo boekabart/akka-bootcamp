@@ -77,14 +77,17 @@ namespace GithubActors.Actors
             Waiting();
         }
 
-        protected override void PreStart()
-        {
-            _githubWorker = Context.ActorOf(Props.Create(() => new GithubWorkerActor(GithubClientFactory.GetClient)));
-        }
+      protected override void PreStart()
+      {
+        _githubWorker = Context
+          .ActorOf(Props.Create(() => new GithubWorkerActor(GithubClientFactory.GetClient))
+            .WithRouter(new RoundRobinPool(10)));
+      }
 
-        private void Waiting()
+      private void Waiting()
         {
-            Receive<GithubCommanderActor.CanAcceptJob>(job => Sender.Tell(new GithubCommanderActor.AbleToAcceptJob(job.Repo)));
+            Receive<GithubCommanderActor.CanAcceptJob>(job => 
+            Sender.Tell(new GithubCommanderActor.AbleToAcceptJob(job.Repo)));
             Receive<BeginJob>(job =>
             {
                 BecomeWorking(job.Repo);

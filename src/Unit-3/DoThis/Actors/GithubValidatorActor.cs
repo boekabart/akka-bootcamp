@@ -109,10 +109,12 @@ namespace GithubActors.Actors
             /* REPO is valid, but can we process it at this time? */
 
             //yes
-            Receive<GithubCommanderActor.UnableToAcceptJob>(job => Context.ActorSelection(ActorPaths.MainFormActor.Path).Tell(job));
+            Receive<GithubCommanderActor.UnableToAcceptJob>(job => 
+            Context.ActorSelection(ActorPaths.MainFormActor.Path).Tell(job));
             
             //no
-            Receive<GithubCommanderActor.AbleToAcceptJob>(job => Context.ActorSelection(ActorPaths.MainFormActor.Path).Tell(job));
+            Receive<GithubCommanderActor.AbleToAcceptJob>(job => 
+            Context.ActorSelection(ActorPaths.MainFormActor.Path).Tell(job));
         }
 
         public static Tuple<string, string> SplitIntoOwnerAndRepo(string repoUri)
